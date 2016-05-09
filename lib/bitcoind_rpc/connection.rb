@@ -38,10 +38,6 @@ module BitcoindRPC
     def request(name, *args)
       BitcoindRPC.logger.debug "> #{name}: #{args.join(',')}"
       response = request_http_post(name, args)
-      BitcoindRPC.logger.debug '<< RAW RESPONSE:'
-      BitcoindRPC.logger.debug response.inspect
-      BitcoindRPC.logger.debug '<< ---'
-      # require 'pry'; binding.pry
       BitcoindRPC.logger.debug "< #{response.code} #{response.message}"
       raise Error, response.message unless (200...300).cover?(response.code.to_i)
       begin
